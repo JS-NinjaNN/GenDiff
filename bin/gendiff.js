@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable import/extensions */
 import { Command } from 'commander';
-import genDiff from '../src/gendiff-logic.js';
+import genDiff from '../src/index.js';
 
 const program = new Command();
 
