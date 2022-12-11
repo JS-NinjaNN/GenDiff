@@ -16,11 +16,10 @@ export default (filepath1, filepath2) => {
     const obj2HasKey = !Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key);
     let newAcc;
     if (bothHasKey) {
-      if (obj1[key] === obj2[key]) {
-        newAcc = `${acc}\n  ${key}: ${obj1[key]}`;
-      } else if (obj1[key] !== obj2[key]) {
-        newAcc = `${acc}\n- ${key}: ${obj1[key]}\n+ ${key}: ${obj2[key]}`;
-      }
+      newAcc =
+        obj1[key] === obj2[key]
+          ? `${acc}\n  ${key}: ${obj1[key]}`
+          : `${acc}\n- ${key}: ${obj1[key]}\n+ ${key}: ${obj2[key]}`;
     } else if (obj1HasKey) {
       newAcc = `${acc}\n- ${key}: ${obj1[key]}`;
     } else if (obj2HasKey) {
