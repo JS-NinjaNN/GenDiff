@@ -2,11 +2,11 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "gendiff",
+  "description": "Gendiff is a cli-app that generates the difference between two json files",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
-  "main": "index.js",
+  "main": "bin/gendiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,13 @@
   },
   "homepage": "https://github.com/ToxicNN/frontend-project-46#readme",
   "dependencies": {
-    "commander": "^9.4.1"
+    "commander": "^9.4.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.8.1"
   }
 }
