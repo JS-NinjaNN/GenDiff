@@ -2,3 +2,5 @@
 *.log
 coverage
 .DS_Store
+file1.json
+file2.json
