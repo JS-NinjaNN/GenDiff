@@ -12,18 +12,18 @@ export default (filepath1, filepath2) => {
   const uniqKeys = _.uniq(Object.keys(obj1), Object.keys(obj2));
   const diff = uniqKeys.reduce((acc, key) => {
     const bothHasKey = Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key);
-    const obj1HasKey = Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key);
-    const obj2HasKey = !Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key);
+    // const obj1HasKey = Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key);
+    // const obj2HasKey = !Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key);
     let newAcc;
     if (bothHasKey) {
       newAcc =
         obj1[key] === obj2[key]
           ? `${acc}\n  ${key}: ${obj1[key]}`
           : `${acc}\n- ${key}: ${obj1[key]}\n+ ${key}: ${obj2[key]}`;
-    } else if (obj1HasKey) {
-      newAcc = `${acc}\n- ${key}: ${obj1[key]}`;
-    } else if (obj2HasKey) {
-      newAcc = `${acc}\n+ ${key}: ${obj2[key]}`;
+    } else {
+      newAcc = Object.hasOwn(obj1, key)
+        ? `${acc}\n- ${key}: ${obj1[key]}`
+        : `${acc}\n+ ${key}: ${obj2[key]}`;
     }
     return newAcc;
   }, '');
