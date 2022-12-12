@@ -16,6 +16,6 @@ beforeEach(() => {
 test('gendiff json', () => {
   gendiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
   const actual = console.log.mock.calls.join('\n');
-  const expected = expected1();
+  const expected = expected1().join('\n');
   expect(actual).toEqual(expected);
 });
