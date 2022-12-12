@@ -7,6 +7,6 @@ lint:
 publish:
 	npm publish --dry-run
 test:
-	npx jest
+	NODE_OPTIONS=--experimental-vm-modules npx jest
 link:
 	sudo npm link
