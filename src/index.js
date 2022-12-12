@@ -17,7 +17,7 @@ export default (filepath1, filepath2) => {
     if (bothHasKey) {
       // prettier-ignore
       newAcc = obj1[key] === obj2[key]
-        ? ` ${acc}\n   ${key}: ${obj1[key]}`
+        ? ` ${acc}\n    ${key}: ${obj1[key]}`
         : ` ${acc}\n  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}`;
     } else {
       newAcc = Object.hasOwn(obj1, key)
