@@ -2,7 +2,7 @@
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import gendiff from '../src/index.js';
-import expected1 from '../__fixtures__/expected1.js';
+import { expected1 } from '../__fixtures__/expected1.js';
 import { jest } from '@jest/globals';
 
 const __filename = fileURLToPath(import.meta.url);
