@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ToxicNN/frontend-project-46#readme",
   "dependencies": {
+    "@jest/globals": "^29.3.1",
     "commander": "^9.4.1",
     "lodash": "^4.17.21"
   },
