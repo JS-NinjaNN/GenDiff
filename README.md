@@ -3,7 +3,7 @@
 [![Actions Status](https://github.com/ToxicNN/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/ToxicNN/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/80f69bf1086b2e740acc/maintainability)](https://codeclimate.com/github/ToxicNN/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/80f69bf1086b2e740acc/test_coverage)](https://codeclimate.com/github/ToxicNN/frontend-project-46/test_coverage)
-[![gendiff](https://github.com/ToxicNN/frontend-project-46/actions/workflows/gendiff.yml/badge.svg)](https://github.com/ToxicNN/frontend-project-46/actions/workflows/gendiff.yml)
+[![gendiff-test](https://github.com/ToxicNN/frontend-project-46/actions/workflows/gendiff.yml/badge.svg)](https://github.com/ToxicNN/frontend-project-46/actions/workflows/gendiff.yml)
 
 ---
 
