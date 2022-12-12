@@ -1,8 +1,7 @@
 # Name of workflow
 name: gendiff
 # Trigger the workflow on push or pull request
-on:
-  - push
+on: push
 # - pull_request
 jobs:
   build:
@@ -17,7 +16,7 @@ jobs:
         # https://github.com/actions/checkout
       - uses: actions/checkout@v2
        # Step's name
-      - name: Use Node.js ${{ matrix.node-version }}
+       #- name: Use Node.js ${{ matrix.node-version }}
         # Configures the node version used on GitHub-hosted runners
         # https://github.com/actions/setup-node
       - uses: actions/setup-node@v2
