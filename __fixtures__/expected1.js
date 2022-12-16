@@ -8,5 +8,5 @@ export default () => {
     '  - follow: false',
     '}',
   ];
-  return string;
+  return string.join('\n');
 };
