@@ -9,7 +9,8 @@
 
 # Description
 
-Gendiff is a cli-app that generates the difference between two json files
+Gendiff is a cli-app that generates the difference between two files
+The app works with formats .json, .yaml (.yml)
 
 ---
 
@@ -36,7 +37,7 @@ The following command will be run as root!
 ```
 make link
 ```
-
+[![asciicast](https://asciinema.org/a/5LPzQEuaOwwRPk0zyNp4FpiUy.svg)](https://asciinema.org/a/5LPzQEuaOwwRPk0zyNp4FpiUy)
 ---
 
 ## Launching app:
@@ -45,4 +46,6 @@ make link
 gendiff <filepath1> <filepath2>
 ```
 
-[![asciicast](https://asciinema.org/a/SnOum8TzrB6c3j58N4scAgMgO.svg)](https://asciinema.org/a/SnOum8TzrB6c3j58N4scAgMgO)
+[![asciicast](https://asciinema.org/a/qVd3Tnu2ZKEJIDGzeuMgjiO07.svg)](https://asciinema.org/a/qVd3Tnu2ZKEJIDGzeuMgjiO07)
+
+[![asciicast](https://asciinema.org/a/omMlFEYyW71dpIxw6wNr6Bi6M.svg)](https://asciinema.org/a/omMlFEYyW71dpIxw6wNr6Bi6M)
