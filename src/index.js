@@ -8,44 +8,30 @@ export default (filepath1, filepath2) => {
   const data2 = parseFile(filepath2);
 
   const iter = (value1, value2) => {
-    const keys = _.union(Object.keys(value1), Object.keys(value2));
-    const diff = keys.map((currentKey) => {
-      let result;
-      if (_.has(value1, currentKey) && _.has(value2, currentKey)) {
-        if (!_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
-          if (value1[currentKey] === value2[currentKey]) {
-            result = { key: currentKey, value: value1[currentKey], type: 'unchanged' };
-          } else {
+    const diff = _.union(Object.keys(value1), Object.keys(value2)).sort()
+      .map((currentKey) => {
+        let result;
+        if (_.has(value1, currentKey) && _.has(value2, currentKey)) {
+          if (!_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
+            result = (value1[currentKey] === value2[currentKey])
+              ? { key: currentKey, value: value1[currentKey], type: 'unchanged' }
+              : {
+                key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
+              };
+          } else if (_.isObject(value1[currentKey]) && _.isObject(value2[currentKey])) {
+            result = { key: currentKey, children: iter(value1[currentKey], value2[currentKey]), type: 'nested' };
+          } else if (_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
             result = {
-              key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
+              key: currentKey, value1: [value1[currentKey]], value2: value2[currentKey], type: 'changed',
             };
           }
-        } else if (_.isObject(value1[currentKey]) && _.isObject(value2[currentKey])) {
-          result = { key: currentKey, children: iter(value1[currentKey], value2[currentKey]), type: 'nested' };
-        } else if (_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
-          result = {
-            key: currentKey, value1: [value1[currentKey]], value2: value2[currentKey], type: 'changed',
-          };
         } else {
-          result = {
-            key: currentKey, value1: value1[currentKey], value2: [value2[currentKey]], type: 'changed',
-          };
+          result = (_.has(value1, currentKey) && !_.has(value2, currentKey))
+            ? { key: currentKey, value: value1[currentKey], type: 'deleted' }
+            : { key: currentKey, value: value2[currentKey], type: 'added' };
         }
-      } else if (_.has(value1, currentKey) && !_.has(value2, currentKey)) {
-        if (!_.isObject(value1[currentKey])) {
-          result = { key: currentKey, value: value1[currentKey], type: 'deleted' };
-        } else {
-          result = value1[currentKey];
-        }
-      } else if (!_.has(value1, currentKey) && _.has(value2, currentKey)) {
-        if (!_.isObject(value2[currentKey])) {
-          result = { key: currentKey, value: value2[currentKey], type: 'added' };
-        } else {
-          result = value2[currentKey];
-        }
-      }
-      return result;
-    });
+        return result;
+      });
     return diff;
   };
   return iter(data1, data2);
