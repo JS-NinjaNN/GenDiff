@@ -4,21 +4,46 @@ import _ from 'lodash';
 import parseFile from './parsers.js';
 
 export default (filepath1, filepath2) => {
-  const obj1 = parseFile(filepath1);
-  const obj2 = parseFile(filepath2);
-  const uniqKeys = _.uniq(Object.keys(obj1), Object.keys(obj2));
+  const data1 = parseFile(filepath1);
+  const data2 = parseFile(filepath2);
 
-  const diff = uniqKeys.reduce((acc, key) => {
-    if (_.has(obj1, key) && _.has(obj2, key)) {
-      if (obj1[key] === obj2[key]) {
-        return [...acc, `    ${key}: ${obj1[key]}`];
+  const iter = (value1, value2) => {
+    const keys = _.union(Object.keys(value1), Object.keys(value2));
+    const diff = keys.flatMap((currentKey) => {
+      console.log(currentKey);
+      let result;
+      if (_.has(value1, currentKey) && _.has(value2, currentKey)) {
+        if (!_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
+          if (value1[currentKey] === value2[currentKey]) {
+            result = { key: currentKey, value: value1[currentKey], type: 'unchanged' };
+          } else {
+            result = {
+              key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
+            };
+          }
+        } else if (_.isObject(value1[currentKey]) && _.isObject(value2[currentKey])) {
+          result = { key: currentKey, children: [iter(value1[currentKey], value2[currentKey])], type: 'nested' };
+        } else if (_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
+
+        } else {
+
+        }
+      } else if (_.has(value1, currentKey) && !_.has(value2, currentKey)) {
+        if (!_.isObject(value1[currentKey])) {
+          result = { key: currentKey, value: value1[currentKey], type: 'deleted' };
+        } else {
+          result = value1[currentKey];
+        }
+      } else if (!_.has(value1, currentKey) && _.has(value2, currentKey)) {
+        if (!_.isObject(value2[currentKey])) {
+          result = { key: currentKey, value: value2[currentKey], type: 'added' };
+        } else {
+          result = value2[currentKey];
+        }
       }
-      return [...acc, `  - ${key}: ${obj1[key]}`, `  + ${key}: ${obj2[key]}`];
-    }
-    if (_.has(obj1, key) && !_.has(obj2, key)) {
-      return [...acc, `  - ${key}: ${obj1[key]}`];
-    }
-    return [...acc, `  + ${key}: ${obj2[key]}`];
-  }, []);
-  return ['{', ...diff, '}'].join('\n');
+      return result;
+    });
+    return diff;
+  };
+  return iter(data1, data2);
 };
