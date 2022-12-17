@@ -12,7 +12,7 @@ common:
       wow: so much
 group1:
   foo: bar
-  baz": bars
+  baz: bars
   nest: str
 group3:
   deep:

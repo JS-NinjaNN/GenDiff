@@ -5,14 +5,14 @@ export default () => {
       children: [
         { key: 'follow', value: false, type: 'added' },
         { key: 'setting1', value: 'Value 1', type: 'unchanged' },
-        { key: 'setting2', value: '200', type: 'deleted' },
+        { key: 'setting2', value: 200, type: 'deleted' },
         {
-          key: 'setting3', value1: 'true', value2: 'null', type: 'changed',
+          key: 'setting3', value1: true, value2: null, type: 'changed',
         },
         { key: 'setting4', value: 'blah blah', type: 'added' },
         {
           key: 'setting5',
-          value: [{ key5: 'value5' }],
+          value: { key5: 'value5' },
           type: 'added',
         },
         {
@@ -51,24 +51,24 @@ export default () => {
     },
     {
       key: 'group2',
-      value: [{
+      value: {
         abc: 12345,
         deep: {
           id: 45,
         },
-      }],
+      },
       type: 'deleted',
     },
     {
       key: 'group3',
-      value: [{
+      value: {
         deep: {
           id: {
             number: 45,
           },
         },
         fee: 100500,
-      }],
+      },
       type: 'added',
     },
   ];
