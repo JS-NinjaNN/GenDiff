@@ -2,10 +2,10 @@ export default () => {
   const diff = [
     {
       key: 'common',
-      value: [
+      children: [
         { key: 'follow', value: false, type: 'added' },
         { key: 'setting1', value: 'Value 1', type: 'unchanged' },
-        { key: 'setting2', value: '200', type: 'deleteted' },
+        { key: 'setting2', value: '200', type: 'deleted' },
         {
           key: 'setting3', value1: 'true', value2: 'null', type: 'changed',
         },
@@ -17,28 +17,28 @@ export default () => {
         },
         {
           key: 'setting6',
-          value:
+          children:
             [
               {
                 key: 'doge',
-                value: [
+                children: [
                   {
                     key: 'wow', value1: '', value2: 'so much', type: 'changed',
                   },
                 ],
-                type: 'unchaged',
+                type: 'nested',
               },
               { key: 'key', value: 'value', type: 'unchanged' },
               { key: 'ops', value: 'vops', type: 'added' },
             ],
-          type: 'unchanged',
+          type: 'nested',
         },
       ],
-      type: 'unchanged',
+      type: 'nested',
     },
     {
       key: 'group1',
-      value: [
+      children: [
         {
           key: 'baz', value1: 'bas', value2: 'bars', type: 'changed',
         },
@@ -47,7 +47,7 @@ export default () => {
           key: 'nest', value1: [{ key: 'value' }], value2: 'str', type: 'changed',
         },
       ],
-      type: 'unchanged',
+      type: 'nested',
     },
     {
       key: 'group2',
