@@ -46,6 +46,4 @@ make link
 gendiff <filepath1> <filepath2>
 ```
 
-[![asciicast](https://asciinema.org/a/qVd3Tnu2ZKEJIDGzeuMgjiO07.svg)](https://asciinema.org/a/qVd3Tnu2ZKEJIDGzeuMgjiO07)
-
-[![asciicast](https://asciinema.org/a/omMlFEYyW71dpIxw6wNr6Bi6M.svg)](https://asciinema.org/a/omMlFEYyW71dpIxw6wNr6Bi6M)
+[![asciicast](https://asciinema.org/a/CA2isfWbkQT5HMQ9uUQRfnCj2.svg)](https://asciinema.org/a/CA2isfWbkQT5HMQ9uUQRfnCj2)
