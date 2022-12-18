@@ -2,8 +2,9 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 import parseFile from './parsers.js';
+import stylish from './formaters/stylish.js';
 
-export default (filepath1, filepath2) => {
+export default (filepath1, filepath2, format) => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
 
@@ -22,7 +23,7 @@ export default (filepath1, filepath2) => {
             result = { key: currentKey, children: iter(value1[currentKey], value2[currentKey]), type: 'nested' };
           } else if (_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
             result = {
-              key: currentKey, value1: [value1[currentKey]], value2: value2[currentKey], type: 'changed',
+              key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
             };
           }
         } else {
@@ -34,5 +35,10 @@ export default (filepath1, filepath2) => {
       });
     return diff;
   };
-  return iter(data1, data2);
+  switch (format) {
+    case 'stylish':
+      return stylish(iter(data1, data2));
+    default:
+      throw new Error(`Формат ${format} не поддерживается!\nВведите один из следующих форматов: stylish`);
+  }
 };
