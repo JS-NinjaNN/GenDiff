@@ -44,7 +44,7 @@ export default () => {
         },
         { key: 'foo', value: 'bar', type: 'unchanged' },
         {
-          key: 'nest', value1: [{ key: 'value' }], value2: 'str', type: 'changed',
+          key: 'nest', value1: { key: 'value' }, value2: 'str', type: 'changed',
         },
       ],
       type: 'nested',
