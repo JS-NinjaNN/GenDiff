@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 import parseFile from './parsers.js';
-import stylish from './formaters/stylish.js';
+import chooseFormat from './formatters/index.js';
 
-export default (filepath1, filepath2, format) => {
+export default (filepath1, filepath2, formatName) => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
 
@@ -35,10 +35,5 @@ export default (filepath1, filepath2, format) => {
       });
     return diff;
   };
-  switch (format) {
-    case 'stylish':
-      return stylish(iter(data1, data2));
-    default:
-      throw new Error(`Формат ${format} не поддерживается!\nВведите один из следующих форматов: stylish`);
-  }
+  return chooseFormat(iter(data1, data2), formatName);
 };
