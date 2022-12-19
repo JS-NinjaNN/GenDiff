@@ -43,7 +43,13 @@ make link
 ## Launching app:
 
 ```
-gendiff <filepath1> <filepath2>
+gendiff [format] <filepath1> <filepath2>
 ```
+### Supported formats:
 
+#### stylish
 [![asciicast](https://asciinema.org/a/CA2isfWbkQT5HMQ9uUQRfnCj2.svg)](https://asciinema.org/a/CA2isfWbkQT5HMQ9uUQRfnCj2)
+
+#### plain
+
+[![asciicast](https://asciinema.org/a/IDUgBDHG4jZxdhxXkmtfjId10.svg)](https://asciinema.org/a/IDUgBDHG4jZxdhxXkmtfjId10)
