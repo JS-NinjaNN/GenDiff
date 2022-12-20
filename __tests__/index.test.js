@@ -5,6 +5,7 @@ import path, { dirname } from 'path';
 import gendiff from '../src/index.js';
 import expectedStylish from '../__fixtures__/expectedStylish.js';
 import expectedPlain from '../__fixtures__/expectedPlain.js';
+import expectedJSON from '../__fixtures__/expectedJSON.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,6 +47,26 @@ describe('gendiff should generate correct plain', () => {
   test('gendiff nested yml should work', () => {
     const actual = gendiff(getFixturePath('nested1.yml'), getFixturePath('nested2.yml'), 'plain');
     const expected = expectedPlain();
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('gendiff should generate correct json', () => {
+  test('gendiff nested json should work', () => {
+    const actual = gendiff(getFixturePath('nested1.json'), getFixturePath('nested2.json'), 'json');
+    const expected = expectedJSON();
+    expect(actual).toEqual(expected);
+  });
+
+  test('gendiff nested yaml should work', () => {
+    const actual = gendiff(getFixturePath('nested1.yaml'), getFixturePath('nested2.yaml'), 'json');
+    const expected = expectedJSON();
+    expect(actual).toEqual(expected);
+  });
+
+  test('gendiff nested yml should work', () => {
+    const actual = gendiff(getFixturePath('nested1.yml'), getFixturePath('nested2.yml'), 'json');
+    const expected = expectedJSON();
     expect(actual).toEqual(expected);
   });
 });
