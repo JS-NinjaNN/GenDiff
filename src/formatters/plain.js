@@ -5,12 +5,11 @@ import { getType, getValue, getKey } from './utils.js';
 const modifyValue = (value) => ((typeof value === 'string') ? `'${value}'` : `${value}`);
 
 export default (diff) => {
-  const iter = (tree, path, parentType) => {
+  const iter = (tree, path, prevNodeType) => {
     const result = tree.map((node) => {
-      const newPath = (parentType === 'nested')
+      const newPath = (prevNodeType === 'nested')
         ? [...path]
         : [];
-      const currentNodeType = getType(node);
       newPath.push(getKey(node));
       let string = '';
       if (getType(node) === 'added') {
@@ -31,6 +30,7 @@ export default (diff) => {
       } else if (getType(node) === 'unchanged') {
         return '';
       } else if (getType(node) === 'nested') {
+        const currentNodeType = getType(node);
         string = `${iter(getValue(node), newPath, currentNodeType)}`;
       }
       return string;
