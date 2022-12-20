@@ -26,8 +26,8 @@ const stringify = (value, replacer, spacesCount, currentDepth) => {
 export default (diff) => {
   const iter = (tree, depth) => {
     const spacesCount = 4;
-    const indent = ' ';
     const indentSize = depth * spacesCount;
+    const indent = ' ';
     const indentForAdded = '+ '.padStart(indentSize, ' ');
     const indentForDeleted = '- '.padStart(indentSize, ' ');
     const currentIndent = indent.repeat(indentSize);
@@ -48,7 +48,11 @@ export default (diff) => {
       }
       return string;
     });
-    return ['{', ...result, `${bracketIndent}}`].join('\n');
+    return [
+      '{',
+      ...result,
+      `${bracketIndent}}`,
+    ].join('\n');
   };
   return iter(diff, 1);
 };
