@@ -53,15 +53,15 @@ Optional arguments:
 
 ```
 
-### Supported formats:
+## Supported formats:
 
-#### stylish
+### stylish
 [![asciicast](https://asciinema.org/a/CA2isfWbkQT5HMQ9uUQRfnCj2.svg)](https://asciinema.org/a/CA2isfWbkQT5HMQ9uUQRfnCj2)
 
-#### plain
+### plain
 
 [![asciicast](https://asciinema.org/a/IDUgBDHG4jZxdhxXkmtfjId10.svg)](https://asciinema.org/a/IDUgBDHG4jZxdhxXkmtfjId10)
 
-#### json
+### json
 
 [![asciicast](https://asciinema.org/a/dNcoNgszhyiN0xBvSHAVf0wG4.svg)](https://asciinema.org/a/dNcoNgszhyiN0xBvSHAVf0wG4)
