@@ -8,7 +8,9 @@ export default (diff, formatName) => {
       return stylish(diff);
     case 'plain':
       return plain(diff);
+    case 'json':
+      return JSON.stringify(diff);
     default:
-      throw new Error(`The ${formatName} format is not supported.\nSupported formats: stylish, plain`);
+      throw new Error(`The ${formatName} format is not supported.\nSupported formats: stylish, plain and json.`);
   }
 };
