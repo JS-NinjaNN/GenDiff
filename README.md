@@ -9,8 +9,9 @@
 
 # Description
 
-Gendiff is a cli-app that generates the difference between two files.
-The app works with formats .json, .yaml (.yml).
+Gendiff is a cli-app that generates the difference between two files and outputs it in one of three formats.
+The app works with formats json and yaml(yml).
+Supported output formats: stylish, plain and json
 
 ---
 
@@ -53,3 +54,7 @@ gendiff [format] <filepath1> <filepath2>
 #### plain
 
 [![asciicast](https://asciinema.org/a/IDUgBDHG4jZxdhxXkmtfjId10.svg)](https://asciinema.org/a/IDUgBDHG4jZxdhxXkmtfjId10)
+
+#### json
+
+[![asciicast](https://asciinema.org/a/dNcoNgszhyiN0xBvSHAVf0wG4.svg)](https://asciinema.org/a/dNcoNgszhyiN0xBvSHAVf0wG4)
