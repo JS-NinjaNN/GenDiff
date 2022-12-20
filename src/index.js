@@ -9,7 +9,8 @@ export default (filepath1, filepath2, formatName) => {
   const data2 = parseFile(filepath2);
 
   const iter = (value1, value2) => {
-    const diff = _.union(Object.keys(value1), Object.keys(value2)).sort()
+    const diff = _.union(Object.keys(value1), Object.keys(value2))
+      .sort()
       .map((currentKey) => {
         let result;
         if (_.has(value1, currentKey) && _.has(value2, currentKey)) {
