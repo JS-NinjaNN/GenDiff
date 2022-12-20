@@ -8,7 +8,7 @@ const program = new Command();
 program
   .name('gendiff')
   .version('1.0.0')
-  .description('Compares two configuration files and shows a difference.')
+  .description('Gendiff is a cli-app that generates the difference between two files and outputs it in one of three formats.\nThe app works with formats json and yaml(yml).\nSupported output formats: stylish, plain and json')
   .argument('<filepath1>')
   .argument('<filepath2>')
   .option('-f, --format <type>', 'output format', 'stylish')
