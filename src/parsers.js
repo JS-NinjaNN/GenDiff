@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { cwd } from 'node:process';
+import { cwd } from 'process';
 import path from 'path';
 import YAML from 'js-yaml';
 
