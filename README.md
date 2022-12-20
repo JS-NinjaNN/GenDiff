@@ -41,11 +41,18 @@ make link
 [![asciicast](https://asciinema.org/a/5LPzQEuaOwwRPk0zyNp4FpiUy.svg)](https://asciinema.org/a/5LPzQEuaOwwRPk0zyNp4FpiUy)
 ---
 
-## Launching app:
+## Usage:
 
 ```
-gendiff [format] <filepath1> <filepath2>
+Usage: gendiff [-h] [-V] [-f] <filepath1> <filepath2>
+
+Optional arguments:
+  -V, --version  Show program's version number and exit.
+  -f, --format   Choose output format.
+  -h, --help     Show this help message and exit.
+
 ```
+
 ### Supported formats:
 
 #### stylish
