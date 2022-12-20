@@ -2,7 +2,7 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-export default (diff, formatName) => {
+export default (diff, formatName = stylish) => {
   switch (formatName) {
     case 'stylish':
       return stylish(diff);
