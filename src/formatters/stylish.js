@@ -4,7 +4,7 @@ import { getType, getValue, getKey } from './utils.js';
 
 const stringify = (value, replacer, spacesCount, currentDepth) => {
   const iter = (currentValue, depth) => {
-    if (!_.isObject(currentValue)) {
+    if (!_.isPlainObject(currentValue)) {
       return `${currentValue}`;
     }
 
