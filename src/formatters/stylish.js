@@ -28,28 +28,27 @@ export default (diff) => {
     const spacesCount = 4;
     const indentSize = depth * spacesCount;
     const indent = ' ';
-    const indentForAdded = '+ '.padStart(indentSize, ' ');
-    const indentForDeleted = '- '.padStart(indentSize, ' ');
     const currentIndent = indent.repeat(indentSize);
+    const currentIndentForAdded = '+ '.padStart(indentSize, ' ');
+    const currentIndentForDeleted = '- '.padStart(indentSize, ' ');
     const bracketIndent = indent.repeat(indentSize - spacesCount);
     const result = tree.map((node) => {
-      const defaultNodeTypes = ['added', 'deleted', 'unchanged'];
-      if (defaultNodeTypes.includes(getType(node))) {
-        switch (getType(node)) {
-          case 'added':
-            return `${indentForAdded}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-          case 'deleted':
-            return `${indentForDeleted}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-          case 'unchanged':
-            return `${currentIndent}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-          // no default
+      switch (getType(node)) {
+        case 'added':
+          return `${currentIndentForAdded}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+        case 'deleted':
+          return `${currentIndentForDeleted}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+        case 'unchanged':
+          return `${currentIndent}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+        case 'changed': {
+          const [value1, value2] = getValue(node);
+          return `${currentIndentForDeleted}${getKey(node)}: ${stringify(value1, ' ', 4, depth + 1)}\n${currentIndentForAdded}${getKey(node)}: ${stringify(value2, ' ', 4, depth + 1)}`;
         }
+        case 'nested':
+          return `${currentIndent}${getKey(node)}: ${iter(getValue(node), depth + 1)}`;
+        // no default
       }
-      if (getType(node) === 'changed') {
-        const [value1, value2] = getValue(node);
-        return `${indentForDeleted}${getKey(node)}: ${stringify(value1, ' ', 4, depth + 1)}\n${indentForAdded}${getKey(node)}: ${stringify(value2, ' ', 4, depth + 1)}`;
-      }
-      return `${currentIndent}${getKey(node)}: ${iter(getValue(node), depth + 1)}`;
+      return '';
     });
     return [
       '{',
