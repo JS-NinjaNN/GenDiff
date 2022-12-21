@@ -33,14 +33,17 @@ export default (diff) => {
     const currentIndent = indent.repeat(indentSize);
     const bracketIndent = indent.repeat(indentSize - spacesCount);
     const result = tree.map((node) => {
-      if (getType(node) === 'added') {
-        return `${indentForAdded}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-      }
-      if (getType(node) === 'deleted') {
-        return `${indentForDeleted}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-      }
-      if (getType(node) === 'unchanged') {
-        return `${currentIndent}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+      const defaultNodeTypes = ['added', 'deleted', 'unchanged'];
+      if (defaultNodeTypes.includes(getType(node))) {
+        switch (getType(node)) {
+          case 'added':
+            return `${indentForAdded}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+          case 'deleted':
+            return `${indentForDeleted}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+          case 'unchanged':
+            return `${currentIndent}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+          // no default
+        }
       }
       if (getType(node) === 'changed') {
         const [value1, value2] = getValue(node);
