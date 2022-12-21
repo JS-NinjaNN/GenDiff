@@ -33,20 +33,20 @@ export default (diff) => {
     const currentIndent = indent.repeat(indentSize);
     const bracketIndent = indent.repeat(indentSize - spacesCount);
     const result = tree.map((node) => {
-      let string = '';
       if (getType(node) === 'added') {
-        string = `${indentForAdded}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-      } else if (getType(node) === 'deleted') {
-        string = `${indentForDeleted}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-      } else if (getType(node) === 'unchanged') {
-        string = `${currentIndent}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
-      } else if (getType(node) === 'changed') {
-        const [value1, value2] = getValue(node);
-        string = `${indentForDeleted}${getKey(node)}: ${stringify(value1, ' ', 4, depth + 1)}\n${indentForAdded}${getKey(node)}: ${stringify(value2, ' ', 4, depth + 1)}`;
-      } else if (getType(node) === 'nested') {
-        string = `${currentIndent}${getKey(node)}: ${iter(getValue(node), depth + 1)}`;
+        return `${indentForAdded}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
       }
-      return string;
+      if (getType(node) === 'deleted') {
+        return `${indentForDeleted}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+      }
+      if (getType(node) === 'unchanged') {
+        return `${currentIndent}${getKey(node)}: ${stringify(getValue(node), ' ', 4, depth + 1)}`;
+      }
+      if (getType(node) === 'changed') {
+        const [value1, value2] = getValue(node);
+        return `${indentForDeleted}${getKey(node)}: ${stringify(value1, ' ', 4, depth + 1)}\n${indentForAdded}${getKey(node)}: ${stringify(value2, ' ', 4, depth + 1)}`;
+      }
+      return `${currentIndent}${getKey(node)}: ${iter(getValue(node), depth + 1)}`;
     });
     return [
       '{',
