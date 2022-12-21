@@ -21,7 +21,7 @@ export default (diff) => {
         case 'changed': {
           const [value1, value2] = getValue(node);
           if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-            return `Property '${newPath.join('.')}' was updated. From [complex value] to [compex value]`;
+            return `Property '${newPath.join('.')}' was updated. From [complex value] to [complex value]`;
           }
           if (_.isPlainObject(value1) || _.isPlainObject(value2)) {
             return _.isPlainObject(value1)
