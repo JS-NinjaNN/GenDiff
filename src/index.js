@@ -14,15 +14,19 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
       .map((currentKey) => {
         let result;
         if (_.has(value1, currentKey) && _.has(value2, currentKey)) {
-          if (!_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
+          if (!_.isPlainObject(value1[currentKey]) && !_.isPlainObject(value2[currentKey])) {
             result = (value1[currentKey] === value2[currentKey])
               ? { key: currentKey, value: value1[currentKey], type: 'unchanged' }
               : {
                 key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
               };
-          } else if (_.isObject(value1[currentKey]) && _.isObject(value2[currentKey])) {
+          } else if (_.isPlainObject(value1[currentKey]) && _.isPlainObject(value2[currentKey])) {
             result = { key: currentKey, children: iter(value1[currentKey], value2[currentKey]), type: 'nested' };
-          } else if (_.isObject(value1[currentKey]) && !_.isObject(value2[currentKey])) {
+          } else if (_.isPlainObject(value1[currentKey]) && !_.isPlainObject(value2[currentKey])) {
+            result = {
+              key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
+            };
+          } else if (!_.isPlainObject(value1[currentKey]) && _.isPlainObject(value2[currentKey])) {
             result = {
               key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
             };
