@@ -1,43 +1,33 @@
 /* eslint-disable import/extensions */
-/* eslint-disable no-console */
-import _ from 'lodash';
+import { readFileSync } from 'fs';
+import { cwd } from 'process';
+import path from 'path';
 import parseFile from './parsers.js';
-import chooseFormat from './formatters/index.js';
+import format from './formatters/index.js';
+import buildTree from './treeBuilder.js';
+
+const readFile = (filepath) => {
+  const fullPath = path.resolve(cwd(), filepath);
+  const data = readFileSync(fullPath, 'utf-8');
+  return data;
+};
+
+const getFormat = (filepath) => {
+  switch (path.extname(filepath)) {
+    case '.json':
+      return 'json';
+    case '.yaml':
+      return 'yaml';
+    case '.yml':
+      return 'yml';
+    default:
+      throw new Error('The file name must be entered with the extension!');
+  }
+};
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
-  const data1 = parseFile(filepath1);
-  const data2 = parseFile(filepath2);
-
-  const iter = (value1, value2) => {
-    const diff = _.sortBy(_.union(Object.keys(value1), Object.keys(value2)))
-      .map((currentKey) => {
-        if (_.has(value1, currentKey) && _.has(value2, currentKey)) {
-          if (!_.isPlainObject(value1[currentKey]) && !_.isPlainObject(value2[currentKey])) {
-            return (value1[currentKey] === value2[currentKey])
-              ? { key: currentKey, value: value1[currentKey], type: 'unchanged' }
-              : {
-                key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
-              };
-          }
-          if (_.isPlainObject(value1[currentKey]) && _.isPlainObject(value2[currentKey])) {
-            return { key: currentKey, children: iter(value1[currentKey], value2[currentKey]), type: 'nested' };
-          }
-          if (_.isPlainObject(value1[currentKey]) && !_.isPlainObject(value2[currentKey])) {
-            return {
-              key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
-            };
-          }
-          if (!_.isPlainObject(value1[currentKey]) && _.isPlainObject(value2[currentKey])) {
-            return {
-              key: currentKey, value1: value1[currentKey], value2: value2[currentKey], type: 'changed',
-            };
-          }
-        }
-        return (_.has(value1, currentKey) && !_.has(value2, currentKey))
-          ? { key: currentKey, value: value1[currentKey], type: 'deleted' }
-          : { key: currentKey, value: value2[currentKey], type: 'added' };
-      });
-    return diff;
-  };
-  return chooseFormat(iter(data1, data2), formatName);
+  const data1 = parseFile(readFile(filepath1), getFormat(filepath1));
+  const data2 = parseFile(readFile(filepath2), getFormat(filepath2));
+  const diff = buildTree(data1, data2);
+  return format(diff, formatName);
 };
