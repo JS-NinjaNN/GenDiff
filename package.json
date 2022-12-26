@@ -21,12 +21,12 @@
   },
   "homepage": "https://github.com/ToxicNN/frontend-project-46#readme",
   "dependencies": {
-    "@jest/globals": "^29.3.1",
     "commander": "^9.4.1",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@jest/globals": "^29.3.1",
     "eslint": "^8.29.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
