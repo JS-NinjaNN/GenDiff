@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import _ from 'lodash';
 import { getType, getValue, getKey } from './utils.js';
 
