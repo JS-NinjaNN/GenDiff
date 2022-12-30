@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import parseFile from './parsers.js';
+import parseData from './parsers.js';
 import format from './formatters/index.js';
 import buildTree from './treeBuilder.js';
 
@@ -10,7 +10,7 @@ const getFormat = (filepath) => _.trim(path.extname(filepath), '.');
 const readFile = (filepath) => {
   const fullPath = path.resolve(process.cwd(), filepath);
   const data = readFileSync(fullPath, 'utf-8');
-  return parseFile(data, getFormat(filepath));
+  return parseData(data, getFormat(filepath));
 };
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
