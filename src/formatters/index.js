@@ -10,6 +10,6 @@ export default (diff, formatName) => {
     case 'json':
       return JSON.stringify(diff);
     default:
-      throw new Error(`The ${formatName} format is not supported.\nSupported formats: stylish, plain and json.`);
+      throw new Error(`The ${formatName} format is not supported.\nSupported output formats: stylish, plain and json.`);
   }
 };
