@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { getType, getValue, getKey } from './utils.js';
 
 const modifyValue = (value) => {
   if (_.isPlainObject(value)) {
@@ -8,27 +7,28 @@ const modifyValue = (value) => {
   return ((typeof value === 'string') ? `'${value}'` : `${value}`);
 };
 
-const formatPlain = (tree, path = [], prevNodeType = 'nested') => {
+const iter = (tree, path = [], prevNodeType = 'nested') => {
   const lines = tree
-    .filter((node) => getType(node) !== 'unchanged')
+    .filter((node) => node.type !== 'unchanged')
     .map((node) => {
       const newPath = (prevNodeType === 'nested')
-        ? [...path, getKey(node)]
+        ? [...path, node.key]
         : [];
-      switch (getType(node)) {
+      switch (node.type) {
         case 'added':
-          return `Property '${newPath.join('.')}' was added with value: ${modifyValue(getValue(node))}`;
+          return `Property '${newPath.join('.')}' was added with value: ${modifyValue(node.value)}`;
         case 'deleted':
           return `Property '${newPath.join('.')}' was removed`;
         case 'changed': {
-          const [value1, value2] = getValue(node);
-          return `Property '${newPath.join('.')}' was updated. From ${modifyValue(value1)} to ${modifyValue(value2)}`;
+          return `Property '${newPath.join('.')}' was updated. From ${modifyValue(node.value1)} to ${modifyValue(node.value2)}`;
         }
-        // no default
+        case 'nested':
+          return `${iter(node.children, newPath, node.type)}`;
+        default:
+          throw new Error(`Unknown type ${node.type}.\nSupported types: added, deleted, unchanged, changed and nested.`);
       }
-      return `${formatPlain(getValue(node), newPath, getType(node))}`;
     });
   return lines.join('\n');
 };
 
-export default formatPlain;
+export default iter;
