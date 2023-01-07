@@ -1,15 +1,12 @@
 import _ from 'lodash';
 
 const IS_FULL = true;
+const spacesCount = 4;
+const replacer = ' ';
 
 const indent = (depth, isFull = false) => {
-  const spacesCount = 4;
   const indentSize = depth * spacesCount;
-  const replacer = ' ';
-  if (isFull === true) {
-    return replacer.repeat(indentSize);
-  }
-  return replacer.repeat(indentSize - 2);
+  return isFull ? replacer.repeat(indentSize) : replacer.repeat(indentSize - 2);
 };
 
 const stringify = (data, depth) => {
