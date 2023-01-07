@@ -10,25 +10,25 @@ const stringify = (value) => {
   return String(value);
 };
 
-const iter = (tree, path = [], prevNodeType = 'nested') => tree
+const buildPath = (node, currentPath) => (currentPath !== '' ? `${currentPath}.${node.key}` : String(node.key));
+
+const iter = (tree, path) => tree
   .filter((node) => node.type !== 'unchanged')
   .map((node) => {
-    const newPath = (prevNodeType === 'nested')
-      ? [...path, node.key]
-      : [];
+    const currentPath = buildPath(node, path);
     switch (node.type) {
       case 'added':
-        return `Property '${newPath.join('.')}' was added with value: ${stringify(node.value)}`;
+        return `Property '${currentPath}' was added with value: ${stringify(node.value)}`;
       case 'deleted':
-        return `Property '${newPath.join('.')}' was removed`;
+        return `Property '${currentPath}' was removed`;
       case 'changed': {
-        return `Property '${newPath.join('.')}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
+        return `Property '${currentPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
       }
       case 'nested':
-        return iter(node.children, newPath, node.type).join('\n');
+        return iter(node.children, currentPath).join('\n');
       default:
-        throw new Error(`Unknown type ${node.type}.\nSupported types: added, deleted, unchanged, changed and nested.`);
+        throw new Error(`Unknown node type ${node.type}.`);
     }
   });
 
-export default (tree) => iter(tree).join('\n');
+export default (tree) => iter(tree, '').join('\n');
