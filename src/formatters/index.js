@@ -1,12 +1,12 @@
-import stylish from './stylish.js';
-import plain from './plain.js';
+import formatStylish from './stylish.js';
+import formatPlain from './plain.js';
 
 export default (diff, formatName) => {
   switch (formatName) {
     case 'stylish':
-      return stylish(diff);
+      return formatStylish(diff);
     case 'plain':
-      return plain(diff);
+      return formatPlain(diff);
     case 'json':
       return JSON.stringify(diff);
     default:
