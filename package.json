@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "Gendiff is a cli-app that generates the difference between two json files",
+  "description": "GenDiff is a cli-app that generates the difference between two json files",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ToxicNN/frontend-project-46.git"
+    "url": "git+https://github.com/JS-Samurai/GenDiff.git"
   },
-  "author": "ToxicNn",
+  "author": "JS-Samurai",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ToxicNN/frontend-project-46/issues"
+    "url": "https://github.com/JS-Samurai/GenDiff/issues"
   },
-  "homepage": "https://github.com/ToxicNN/frontend-project-46#readme",
+  "homepage": "https://github.com/JS-Samurai/GenDiff#readme",
   "dependencies": {
     "commander": "^9.4.1",
     "js-yaml": "^4.1.0",
