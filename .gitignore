@@ -2,4 +2,3 @@
 *.log
 coverage
 .DS_Store
-__fixtures__/expectedDiff.js
