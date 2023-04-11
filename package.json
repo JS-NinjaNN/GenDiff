@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JS-Samurai/GenDiff.git"
+    "url": "git+https://github.com/JS-NinjaNN/GenDiff.git"
   },
-  "author": "JS-Samurai",
+  "author": "JS-NinjaNN",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JS-Samurai/GenDiff/issues"
+    "url": "https://github.com/JS-NinjaNN/GenDiff/issues"
   },
-  "homepage": "https://github.com/JS-Samurai/GenDiff#readme",
+  "homepage": "https://github.com/JS-NinjaNN/GenDiff#readme",
   "dependencies": {
     "commander": "^9.4.1",
     "js-yaml": "^4.1.0",
